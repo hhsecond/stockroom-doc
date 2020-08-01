@@ -11,8 +11,6 @@
         <meta name="description" content="Version control for software 2.0">
       
       
-        <link rel="canonical" href="https://stockroom.page/">
-      
       
       <link rel="shortcut icon" href="img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
@@ -60,11 +58,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#introduction" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -88,7 +81,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Home
+              
             
           </span>
         </div>
@@ -230,94 +223,12 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-                
-                
-                  
-                
-                
-                <div align="center">
-  <img src="img/logo_with_text.png" width="296" height="323">
-  <br><br><br>
-</div>
+  <h1>404 - Not found</h1>
 
-<p><a href="https://pypi.python.org/pypi/stockroom"><img alt="PyPi" src="https://img.shields.io/pypi/v/stockroom?style=for-the-badge" /></a>
-<a href="https://codecov.io/gh/tensorwerk/stockroom/"><img alt="CodeCov" src="https://img.shields.io/codecov/c/github/tensorwerk/stockroom?style=for-the-badge" /></a>
-<a href="https://lgtm.com/projects/g/tensorwerk/stockroom/"><img alt="lgtm" src="https://img.shields.io/lgtm/grade/python/github/tensorwerk/stockroom?style=for-the-badge" /></a></p>
-<p>Stockroom is a platform to version models, data, parameters, metrics etc. alongside git
-versioned source code. It is licensed as a Free software under
-<strong>Apache Software License 2.0</strong></p>
-<h1 id="introduction">Introduction</h1>
-<p>Stockroom is built on top of <a href="https://github.com/tensorwerk/hangar-py">hangar</a> &amp; hence
-is high performing. It abstracts away few hangar APIs by making assumptions and 
-operating implicitly. One good example for such implicit decision-making is the
-"checkout management". Stockroom, as a package, is not self-contained and whenever
-possible, off load the heavy lifting to hangar's well written APIs. However,
-the tutorials and documentations are self-contained to make sure users
-doesn't have to run through different places to start working on stockroom.</p>
-<h1 id="why">Why</h1>
-<p>One important motivation behind the initial design of stockroom is to avoid users
-learning another tool for versioning. We try to make the APIs as minimal and familiar as
-possible while relying on other popular tools such as git &amp; hangar. Stockroom let "git"
-does <code>checkout</code> and rely on "git" to move between branches/commits. This allows
-stockroom to present a very simple and intuitive API collection to the user
-while avoiding the need of user learning another set of commands otherwise they'd need.
-In a nutshell, Stockroom exists for three reasons</p>
-<ul>
-<li>Work hand-in-hand with git</li>
-<li>Make it possible to version model, data, hyper-parameters metrics etc.</li>
-<li>Making versioning easy for <a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">software 2.0</a> stack</li>
-</ul>
-<h2 id="example">Example</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">StockRoom</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="hll"><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">()</span>
-</span><span class="n">weights</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">]</span>
-<span class="hll"><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-</span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
-<span class="hll">        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-</span>        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">update_weights</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">previous_loss</span><span class="p">:</span>
-<span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
-</span><span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s1">&#39;adding a better model)</span>
-</span></code></pre></div>
-
-
-<h2 id="example-cli">Example CLI</h2>
-<p>Setup the repo with:</p>
-<div class="termy">
-
-<div class="codehilite"><pre><span></span><code><span class="gp">$</span> stock init
-<span class="go">Initializing stock repository</span>
-<span class="go">---&gt; 100%</span>
-</code></pre></div>
-
-
-
-</div>
-                
-              
               
                 
 
@@ -392,7 +303,7 @@ In a nutshell, Stockroom exists for three reasons</p>
       
       <script>
         app = initialize({
-          base: ".",
+          base: "",
           features: [],
           search: Object.assign({
             worker: "assets/javascripts/worker/search.a68abb33.min.js"
