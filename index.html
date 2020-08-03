@@ -185,19 +185,40 @@
       
       
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="." title="Home" class="md-nav__link md-nav__link--active">
+      Home
+    </a>
+    
+  </li>
+
+    
+      
+      
+      
+
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
-    <label class="md-nav__link" for="nav-1">
+    <label class="md-nav__link" for="nav-2">
       Languages
       <span class="md-nav__icon md-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
       </span>
     </label>
     <nav class="md-nav" aria-label="Languages" data-md-level="1">
-      <label class="md-nav__title" for="nav-1">
+      <label class="md-nav__title" for="nav-2">
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
         </span>
@@ -279,24 +300,6 @@ as possible. Similar to other versioning tools, stockroom let "git" does <code>c
 and rely on "git" to move between branches/commits. But unlike other tools, we channel
 your data access through the smart API so that we don't need to move the huge data files
 around when you traverse between commits.   </p>
-<h2 id="example">Example</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">StockRoom</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="hll"><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">()</span>
-</span><span class="n">weights</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">]</span>
-<span class="hll"><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-</span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
-<span class="hll">        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dataset_name&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-</span>        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">update_weights</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">previous_loss</span><span class="p">:</span>
-<span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
-</span><span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s1">&#39;adding a better model)</span>
-</span></code></pre></div>
-
-
 <h2 id="installation">Installation</h2>
 <div class="termy">
 
@@ -308,9 +311,29 @@ around when you traverse between commits.   </p>
 
 </div>
 
+<h2 id="example">Example</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">StockRoom</span>
+
+<span class="hll"><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="hll"><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">])</span>
+</span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="hll">        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dataset_name&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+</span>        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">previous_loss</span><span class="p">:</span>
+<span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</span><span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;resnet50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</span><span class="hll">            <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s1">&#39;adding a better model&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+
+
 <h2 id="contributing">Contributing</h2>
 <p>We'd love to have you in the contributors list. Do check out the <a href="">contributor's guide</a> before submitting a PR.
-We recognize and celebrate each contributions in possible ways we can; here is our latest #Hall-Of-Fame</p>
+Here is our latest #Hall-Of-Fame</p>
 <p><a href="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/links/0"><img alt="" src="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/images/0" /></a>
 <a href="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/links/1"><img alt="" src="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/images/1" /></a>
 <a href="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/links/2"><img alt="" src="https://sourcerer.io/fame/hhsecond/tensorwerk/stockroom/images/2" /></a>
