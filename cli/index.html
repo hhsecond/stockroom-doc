@@ -11,17 +11,19 @@
         <meta name="description" content="Version control for software 2.0">
       
       
+        <link rel="canonical" href="https://stockroom.page/cli/">
       
-      <link rel="shortcut icon" href="img/favicon.ico">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
     
     
       
-        <title>stockroom</title>
+        <title>CLI Reference - stockroom</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.b5d04df8.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.b5d04df8.min.css">
       
       
     
@@ -35,9 +37,9 @@
     
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="stylesheets/termynal.css">
+      <link rel="stylesheet" href="../stylesheets/termynal.css">
     
     
       
@@ -58,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cli-reference" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -67,7 +74,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="https://stockroom.page" title="stockroom" class="md-header-nav__button md-logo" aria-label="stockroom">
       
-  <img src="img/logo_white.png" alt="logo">
+  <img src="../img/logo_white.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -81,7 +88,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              
+              CLI Reference
             
           </span>
         </div>
@@ -153,7 +160,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://stockroom.page" title="stockroom" class="md-nav__button md-logo" aria-label="stockroom">
       
-  <img src="img/logo_white.png" alt="logo">
+  <img src="../img/logo_white.png" alt="logo">
 
     </a>
     stockroom
@@ -180,7 +187,7 @@
 
 
   <li class="md-nav__item">
-    <a href="." title="Home" class="md-nav__link">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -234,7 +241,7 @@
 
 
   <li class="md-nav__item">
-    <a href="quick-start/" title="Quick Start" class="md-nav__link">
+    <a href="../quick-start/" title="Quick Start" class="md-nav__link">
       Quick Start
     </a>
   </li>
@@ -244,11 +251,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="cli/" title="CLI Reference" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="CLI Reference" class="md-nav__link md-nav__link--active">
       CLI Reference
     </a>
+    
   </li>
 
     
@@ -259,12 +275,91 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                
+                  
+                
+                
+                <h1 id="cli-reference">CLI Reference</h1>
+<p>This page provides documentation for our command line tools.</p>
+<h1 id="stock">stock</h1>
+<p>The <code>stock</code> CLI provides a git-like experience (whenever possible) to interact with
+the stock repository. It also means that the <em>current working directory</em> is where
+the stock repository would exist (like git 😊 ).</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>stock [OPTIONS] COMMAND [ARGS]...
+</code></pre></div>
 
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code>  --version  display current stockroom version
+</code></pre></div>
+
+<h2 id="commit">commit</h2>
+<p>It does a stock commit. Stock commit consists of two actions</p>
+<ol>
+<li>Make a hangar commit</li>
+<li>Update the <code>head.stock</code> file (git will track this file if you are using git)</li>
+</ol>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>stock commit [OPTIONS]
+</code></pre></div>
+
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code>  -m, --message TEXT  The commit message. If multiple arguments are provided,
+                      each of them gets converted into a new line
+</code></pre></div>
+
+<h2 id="import">import</h2>
+<p>Downloads and add a pytorch dataset (from torchvision, torchtext or torchaudio)
+to StockRoom. It creates the repo if it doesn't exist and loads the dataset
+into a repo for you</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>stock import [OPTIONS] DATASET_NAME
+</code></pre></div>
+
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code>  -d, --download-dir PATH  If you have the dataset downloaded in a non-default
+                           path or want to download it to a non-default path,
+                           pass it here
+</code></pre></div>
+
+<h2 id="init">init</h2>
+<p>Init stockroom repository. This will create a .hangar directory and a <code>head.stock</code>
+file in your <code>cwd</code>. <code>stock init</code> would be triggered implicitly if you are making
+a stock repository by using <code>stock import</code> but in all other case, you'd need to
+initialize a stock repository to start operating on it with the python APIs</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>stock init [OPTIONS]
+</code></pre></div>
+
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code>  --username TEXT  Username of the user
+  --email TEXT     Email address of the user
+  --overwrite      overwrite a repository if it exists at the current path
+</code></pre></div>
+
+<h1 id="_1"></h1>
+                
+              
               
                 
 
@@ -277,6 +372,27 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../quick-start/" title="Quick Start" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Quick Start
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -334,26 +450,26 @@
       
     </div>
     
-      <script src="assets/javascripts/vendor.92ffa368.min.js"></script>
-      <script src="assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
-          base: "",
+          base: "..",
           features: [],
           search: Object.assign({
-            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
       
-        <script src="js/termynal.js"></script>
+        <script src="../js/termynal.js"></script>
       
-        <script src="js/chat.js"></script>
+        <script src="../js/chat.js"></script>
       
         <script src="https://sidecar.gitter.im/dist/sidecar.v1.js"></script>
       
-        <script src="js/custom.js"></script>
+        <script src="../js/custom.js"></script>
       
     
   </body>
