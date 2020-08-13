@@ -11,7 +11,7 @@
         <meta name="description" content="Version control for software 2.0">
       
       
-        <link rel="canonical" href="https://stockroom.page/cli/">
+        <link rel="canonical" href="https://stockroom.page/contributing/">
       
       
       <link rel="shortcut icon" href="../img/favicon.ico">
@@ -19,7 +19,7 @@
     
     
       
-        <title>CLI Reference - stockroom</title>
+        <title>Contribution Guide - stockroom</title>
       
     
     
@@ -61,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-reference" class="md-skip">
+        <a href="#contributing-to-the-code" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              CLI Reference
+              Contribution Guide
             
           </span>
         </div>
@@ -251,20 +251,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="CLI Reference" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../cli/" title="CLI Reference" class="md-nav__link">
       CLI Reference
     </a>
-    
   </li>
 
     
@@ -284,11 +275,56 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../contributing/" title="Contribution Guide" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Contribution Guide
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Contribution Guide" class="md-nav__link md-nav__link--active">
       Contribution Guide
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-to-the-code" class="md-nav__link">
+    Contributing to the code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-to-the-documentation" class="md-nav__link">
+    Contributing to the documentation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -318,8 +354,30 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-to-the-code" class="md-nav__link">
+    Contributing to the code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-to-the-documentation" class="md-nav__link">
+    Contributing to the documentation
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -335,65 +393,45 @@
                   
                 
                 
-                <h1 id="cli-reference">CLI Reference</h1>
-<p>This page provides documentation for our command line tools.</p>
-<h1 id="stock">stock</h1>
-<p>The <code>stock</code> CLI provides a git-like experience (whenever possible) to interact with
-the stock repository. It also means that the <em>current working directory</em> is where
-the stock repository would exist (like git 😊 ).</p>
-<p>Usage:</p>
-<div class="highlight"><pre><span></span><code>stock [OPTIONS] COMMAND [ARGS]...
+                  <h1>Contribution Guide</h1>
+                
+                <p>If you wish to contribute to stockroom (yaay!!🎉🎉) decide whether it needs to be discussed with the dev team
+before you start spending time on it. If you are in doubt, ask us in <a href="https://join.slack.com/t/hangarusergroup/shared_invite/zt-886tggtd-_rs1RIb5ACz5g~AzyhphPg">slack</a>
+or raise a <a href="https://github.com/tensorwerk/stockroom/issues/new/choose">Github issue</a> (🙄) </p>
+<ul>
+<li>You'd need to fork the stockroom repository (look for the "Fork" button on top right) and then clone the fork locally.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git clone git@github.com:your_name_here/stockroom.git
 </code></pre></div>
 
-<p>Options:</p>
-<div class="highlight"><pre><span></span><code>  --version  display current stockroom version
+<ul>
+<li>Create a branch locally and make your changes. Feel free to reach us if you need a code review before you finish your work</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git checkout -b your-branch-name
 </code></pre></div>
 
-<h2 id="commit">commit</h2>
-<p>It does a stock commit. Stock commit consists of two actions</p>
-<ol>
-<li>Make a hangar commit</li>
-<li>Update the <code>head.stock</code> file (git will track this file if you are using git)</li>
-</ol>
-<p>Usage:</p>
-<div class="highlight"><pre><span></span><code>stock commit [OPTIONS]
+<h2 id="contributing-to-the-code">Contributing to the code</h2>
+<p>Once done with the changes, run the test suite. It will run existing test cases, check coverage, run linter and mypy.
+Also, make sure you have updated the documentation, test suite and the <code>changelog.md</code> file in <code>docs</code> directory before
+creating the PR</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> tox
+<span class="go">---&gt; 100%</span>
 </code></pre></div>
 
-<p>Options:</p>
-<div class="highlight"><pre><span></span><code>  -m, --message TEXT  The commit message. If multiple arguments are provided,
-                      each of them gets converted into a new line
+</div>
+
+<h2 id="contributing-to-the-documentation">Contributing to the documentation</h2>
+<p>We are using the amazing <a href="https://www.mkdocs.org/">mkdocs</a> library for documentation. You can spin up the mkdocs live debugging server
+from the root of the repository and see the changes you are making in realtime. </p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> mkdocs serve
+<span class="go">---&gt; 100%</span>
 </code></pre></div>
 
-<h2 id="import">import</h2>
-<p>Downloads and add a pytorch dataset (from torchvision, torchtext or torchaudio)
-to StockRoom. It creates the repo if it doesn't exist and loads the dataset
-into a repo for you</p>
-<p>Usage:</p>
-<div class="highlight"><pre><span></span><code>stock import [OPTIONS] DATASET_NAME
-</code></pre></div>
-
-<p>Options:</p>
-<div class="highlight"><pre><span></span><code>  -d, --download-dir PATH  If you have the dataset downloaded in a non-default
-                           path or want to download it to a non-default path,
-                           pass it here
-</code></pre></div>
-
-<h2 id="init">init</h2>
-<p>Init stockroom repository. This will create a .hangar directory and a <code>head.stock</code>
-file in your <code>cwd</code>. <code>stock init</code> would be triggered implicitly if you are making
-a stock repository by using <code>stock import</code> but in all other case, you'd need to
-initialize a stock repository to start operating on it with the python APIs</p>
-<p>Usage:</p>
-<div class="highlight"><pre><span></span><code>stock init [OPTIONS]
-</code></pre></div>
-
-<p>Options:</p>
-<div class="highlight"><pre><span></span><code>  --username TEXT  Username of the user
-  --email TEXT     Email address of the user
-  --overwrite      overwrite a repository if it exists at the current path
-</code></pre></div>
-
-<h1 id="_1"></h1>
+</div>
                 
               
               
@@ -412,7 +450,7 @@ initialize a stock repository to start operating on it with the python APIs</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../quick-start/" title="Quick Start" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../help-us/" title="Help Us" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -421,19 +459,19 @@ initialize a stock repository to start operating on it with the python APIs</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Quick Start
+                Help Us
               </div>
             </div>
           </a>
         
         
-          <a href="../help-us/" title="Help Us" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../changelog/" title="Release Notes" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Help Us
+                Release Notes
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
