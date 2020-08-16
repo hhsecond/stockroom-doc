@@ -411,12 +411,12 @@ or raise a <a href="https://github.com/tensorwerk/stockroom/issues/new/choose">G
 </code></pre></div>
 
 <h2 id="contributing-to-the-code">Contributing to the code</h2>
-<p>Once done with the changes, run the test suite. It will run existing test cases, check coverage, run linter and mypy.
-Also, make sure you have updated the documentation, test suite and the <code>changelog.md</code> file in <code>docs</code> directory before
-creating the PR</p>
+<p>Once done with the changes, run the test suite. It will run existing test cases, check coverage, run <code>black</code> and <code>mypy</code>.
+Also, make sure you have updated the documentation, added required test cases and modified the <code>changelog.md</code> file
+in <code>docs</code> directory before creating the PR</p>
 <div class="termy">
 
-<div class="highlight"><pre><span></span><code><span class="gp">$</span> tox
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> bash ./scripts/test.sh
 <span class="go">---&gt; 100%</span>
 </code></pre></div>
 
