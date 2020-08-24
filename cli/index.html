@@ -393,6 +393,15 @@ initialize a stock repository to start operating on it with the python APIs</p>
   --overwrite      overwrite a repository if it exists at the current path
 </code></pre></div>
 
+<h2 id="liberate">liberate</h2>
+<p>Release the writer lock forcefully and make the repository available for writing.</p>
+<h2 id="warning">Warning</h2>
+<p>If another process, that has the writer lock, is writing to the repo, releasing the
+lock leads to an exception in that process. Use it carefully</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>stock liberate [OPTIONS]
+</code></pre></div>
+
 <h1 id="_1"></h1>
                 
               

@@ -604,7 +604,7 @@
                 
                 
                 <h1 id="quick-start">🏃‍♀️ Quick Start</h1>
-<p>Eager to start using stockroom? This page gives a good and crisp introduction to stockroom.</p>
+<p>Eager to take a quick run through stockroom? This page gives a good and crisp introduction to stockroom.</p>
 <ol>
 <li>Import a cifar10 dataset from torchvision to stockroom</li>
 <li>Train a CNN with this data</li>
@@ -617,11 +617,11 @@
 in size. Use conda if you can</p>
 </div>
 <h2 id="introduction">Introduction</h2>
-<p>Stockroom exposes the data as three shelves. Data, Model and Experiments. This segregation let stockroom
-to be prejudice about what goes inside and optimize the storage. Stockroom also introduces <code>stock</code> CLI
-which gives you the ability to interact with your stockroom repository in a git-like way. Checkout the
-<a href="../cli/">reference doc</a> for complete CLI reference. You'll be using both the CLI and Python APIs of
-stockroom in this tutorial. </p>
+<p>Stockroom exposes the environment as three shelves. Data, Model and Experiments. This segregation let
+stockroom to be prejudice about what goes inside and optimize the storage. Stockroom also introduces
+<code>stock</code> CLI which gives you the ability to interact with your stockroom repository in a git-like way.
+Checkout the <a href="../cli/">reference doc</a> for complete CLI reference. You'll be using both the CLI and
+Python APIs of stockroom in this tutorial. </p>
 <h2 id="initialize-stock-repository">Initialize Stock Repository</h2>
 <p><code>CD</code> to your project directory and initialize it as a <code>stock</code> repository</p>
 <div class="termy">
@@ -644,7 +644,8 @@ stockroom in this tutorial. </p>
 <p class="admonition-title">Data is Tensor</p>
 <p>Stockroom makes strong assumptions about your data. Any data point that goes into stockroom must be
 a tensor a.k.a <code>numpy.ndarray</code> object. It is why stockroom could optimize the data storage
-and versioning efficiently. Also, know that, we have borrowed this philosophy from Hangar </p>
+and versioning efficiently. Also, know that, this philosophy is originally from Hangar and we use
+Hangar internally for all type of storages </p>
 </div>
 <div class="termy">
 
@@ -712,8 +713,13 @@ object that gives you the access to the storage</p>
 <div class="admonition info">
 <p class="admonition-title">Read Access</p>
 <p>Making <code>stock</code> object as given above will only give you a read enabled object. For saving data, you'd need
-to make a write enabled object using
-<div class="highlight"><pre><span></span><code><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+to open the <code>enable_write</code> context manager or create the <code>stock</code> object by enabling write mode.
+<div class="highlight"><pre><span></span><code><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">():</span>
+    <span class="n">write_into</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
+<span class="c1"># or</span>
+<span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">enable_write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">write_into</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
 </code></pre></div>
 You'll see an example below</p>
 </div>
@@ -737,7 +743,9 @@ from the <code>.data</code> attribute and then fetch the data at a particular in
 
 <div class="admonition tip">
 <p class="admonition-title">Column Names</p>
-<p>You need to know the column names to interact with the data in the <code>.data</code> shelf. Use 
+<p>You need to know the column names to interact with the data in the <code>.data</code> shelf.
+These names will be printed to the terminal when you import data. But if you
+missed/forget them, use 
 <div class="highlight"><pre><span></span><code><span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </code></pre></div></p>
 </div>
@@ -793,9 +801,7 @@ that data in a new commit, you can always time travel to previous commit and acc
 <code>.experiment</code> shelf. While the <code>.data</code> shelf only allow you to store tensor data, <code>.experiment</code> shelf
 will eventually allow you to store any artificats, like a loss graph, or a pickled file you'd need
 for training your model etc.</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
@@ -808,10 +814,10 @@ for training your model etc.</p>
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-<span class="hll">                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
-</span><span class="hll">                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
-</span>                <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experiment with better result. Loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+</span><span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
+</span><span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
+</span>                    <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
                 <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
 
@@ -819,9 +825,7 @@ for training your model etc.</p>
 <p>The <code>.model</code> shelf takes <code>state_dict</code> from a pytorch model and nothing else. You will eventually be able to store
 a <code>jit</code>ed model into your <code>.experiment</code> store but <code>.model</code> shelf is designed to store your model weights passed
 as a dictionary.</p>
-<div class="highlight"><pre><span></span><code><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
@@ -834,11 +838,11 @@ as a dictionary.</p>
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
-<span class="hll">                <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
-</span>                <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experiment with better result. Loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+</span>                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
+                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
+<span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</span>                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
 
 <div class="admonition tip">
@@ -848,11 +852,11 @@ especially visualization tools, to interact with the data in stockroom. This wil
 the model weights, visualize them and even diff it 🤯😍</p>
 </div>
 <h3 id="commit-your-changes">Commit your changes</h3>
-<p>Commit your changes as you move forward, you can always time travel back and look at
+<p>Commit your changes as you move forward, you can always time travel back and look at. With the context
+managers, <code>autocommit</code> is enabled by default. You can control this behaviour by changing the argument
+value
 <code>.data</code> or <code>.experiment</code> or <code>.model</code> shelves</p>
-<div class="highlight"><pre><span></span><code><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
@@ -865,11 +869,11 @@ the model weights, visualize them and even diff it 🤯😍</p>
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
-                <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
-<span class="hll">                <span class="n">stock</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experiment with better result. Loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span>                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+</span>                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
+                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
+                    <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
 
 <div class="admonition info">
