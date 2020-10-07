@@ -324,11 +324,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dataloader" class="md-nav__link">
-    DataLoader
+  <a href="#dataset-and-dataloader" class="md-nav__link">
+    Dataset and DataLoader
   </a>
   
-    <nav class="md-nav" aria-label="DataLoader">
+    <nav class="md-nav" aria-label="Dataset and DataLoader">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -520,11 +520,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dataloader" class="md-nav__link">
-    DataLoader
+  <a href="#dataset-and-dataloader" class="md-nav__link">
+    Dataset and DataLoader
   </a>
   
-    <nav class="md-nav" aria-label="DataLoader">
+    <nav class="md-nav" aria-label="Dataset and DataLoader">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -606,24 +606,24 @@
                 <h1 id="quick-start">🏃‍♀️ Quick Start</h1>
 <p>Eager to take a quick run through stockroom? This page gives a good and crisp introduction to stockroom.</p>
 <ol>
-<li>Import a cifar10 dataset from torchvision to stockroom</li>
+<li>Import the CIFAR10 dataset from torchvision to stockroom</li>
 <li>Train a CNN with this data</li>
-<li>Save the hyper parameters and model to stockroom for reproducibility</li>
+<li>Save the hyper-parameters and model to stockroom for reproducibility</li>
 </ol>
 <p>You need to install <code>stockroom</code>, <code>pytorch</code>, <code>torchvision</code> and <code>matplotlib</code> for this tutorial</p>
 <div class="admonition tip">
 <p class="admonition-title">Use conda</p>
-<p>installing pytorch and torchvision using pypi might install the <code>manylinux</code> bundle which is huge
-in size. Use conda if you can</p>
+<p>Installing pytorch and torchvision using PyPI might install the <code>manylinux</code> bundle which is huge
+in size. Use <code>conda</code> if you can.</p>
 </div>
 <h2 id="introduction">Introduction</h2>
-<p>Stockroom exposes the environment as three shelves. Data, Model and Experiments. This segregation let
+<p>Stockroom exposes the environment as three shelves: Data, Model and Experiments. This segregation let
 stockroom to be prejudice about what goes inside and optimize the storage. Stockroom also introduces
 <code>stock</code> CLI which gives you the ability to interact with your stockroom repository in a git-like way.
-Checkout the <a href="../cli/">reference doc</a> for complete CLI reference. You'll be using both the CLI and
+Check out the <a href="../cli/">reference doc</a> for complete CLI reference. You'll be using both the CLI and
 Python APIs of stockroom in this tutorial. </p>
 <h2 id="initialize-stock-repository">Initialize Stock Repository</h2>
-<p><code>CD</code> to your project directory and initialize it as a <code>stock</code> repository</p>
+<p><code>cd</code> to your project directory and initialize it as a <code>stock</code> repository:</p>
 <div class="termy">
 
 <div class="highlight"><pre><span></span><code><span class="gp">$</span> stock init --username myname --email a@b.c
@@ -633,7 +633,7 @@ Python APIs of stockroom in this tutorial. </p>
 </div>
 
 <h2 id="import-cifar10">Import CIFAR10</h2>
-<p>StockRoom keeps all your data in <code>.data</code> shelf arranged as columns. In our case, data is imported as four columns.</p>
+<p>Stockroom keeps all your data in <code>data</code> shelf arranged as columns. In our case, data is imported as four columns.</p>
 <ul>
 <li>Train images</li>
 <li>Train labels</li>
@@ -643,9 +643,9 @@ Python APIs of stockroom in this tutorial. </p>
 <div class="admonition info">
 <p class="admonition-title">Data is Tensor</p>
 <p>Stockroom makes strong assumptions about your data. Any data point that goes into stockroom must be
-a tensor a.k.a <code>numpy.ndarray</code> object. It is why stockroom could optimize the data storage
-and versioning efficiently. Also, know that, this philosophy is originally from Hangar and we use
-Hangar internally for all type of storages </p>
+a tensor a.k.a <code>numpy.ndarray</code> object. That's why stockroom can optimize the data storage
+and versioning efficiently. This philosophy is originally coming from Hangar, in fact we are using
+Hangar internally for all type of storages.</p>
 </div>
 <div class="termy">
 
@@ -664,11 +664,11 @@ building the network. We are using the <a href="https://pytorch.org/tutorials/be
 from pytorch's blitz tutorial here, with few modification to load the data from stockroom instead of torchvision.</p>
 <div class="admonition tip">
 <p class="admonition-title">Stockroom is better off with git</p>
-<p>Stockroom is designed to be able work without git but git will enable you to track your source code along with machine
-learning artifacts and data</p>
+<p>Stockroom is designed to be able work without git. However, git will enable you to track your source code along with machine
+learning artifacts and data.</p>
 </div>
 <h2 id="build-the-model">Build The Model</h2>
-<p>We'll build a simple CNN model as given in the pytorch tutorial</p>
+<p>We'll build a simple CNN model as given in the PyTorch tutorial:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span> 
 
@@ -691,10 +691,9 @@ learning artifacts and data</p>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
 </code></pre></div>
-
 <h2 id="exploring-data">Exploring data</h2>
-<p>Stockroom gives you simple, dictionary-like APIs for accessing and storing things. You'd create a <code>stock</code>
-object that gives you the access to the storage</p>
+<p>Stockroom gives you simple, dictionary-like APIs for accessing and storing things. Let's create a <code>stock</code>
+object that provides access to the storage.</p>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">StockRoom</span>
 </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -709,10 +708,9 @@ object that gives you the access to the storage</p>
 <span class="n">img</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;cifar10-train-image&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
 <span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </code></pre></div>
-
 <div class="admonition info">
 <p class="admonition-title">Read Access</p>
-<p>Making <code>stock</code> object as given above will only give you a read enabled object. For saving data, you'd need
+<p>Creating a <code>stock</code> object as given above will only give you a read-only object. For saving data, you'd need
 to open the <code>enable_write</code> context manager or create the <code>stock</code> object by enabling write mode.
 <div class="highlight"><pre><span></span><code><span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">()</span>
 <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">():</span>
@@ -721,11 +719,11 @@ to open the <code>enable_write</code> context manager or create the <code>stock<
 <span class="n">stock</span> <span class="o">=</span> <span class="n">StockRoom</span><span class="p">(</span><span class="n">enable_write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">write_into</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
 </code></pre></div>
-You'll see an example below</p>
+You'll see an example below.</p>
 </div>
 <h3 id="accessing-data">Accessing data</h3>
-<p>As you already know, data is stored as columns inside the <code>.data</code> shelf in stockroom. You can get fetch the column
-from the <code>.data</code> attribute and then fetch the data at a particular index - here we take the 100th data point.</p>
+<p>As you already know, data is stored as columns inside the <code>data</code> shelf in stockroom. You can fetch the column
+from the <code>data</code> attribute and then fetch the data at a particular index - here we select the 100th data point.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">StockRoom</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -740,22 +738,21 @@ from the <code>.data</code> attribute and then fetch the data at a particular in
 <span class="hll"><span class="n">img</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;cifar10-train-image&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
 </span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </code></pre></div>
-
 <div class="admonition tip">
 <p class="admonition-title">Column Names</p>
-<p>You need to know the column names to interact with the data in the <code>.data</code> shelf.
+<p>You need to know the column names to interact with the data in the <code>data</code> shelf.
 These names will be printed to the terminal when you import data. But if you
-missed/forget them, use 
+missed/forget them, use:
 <div class="highlight"><pre><span></span><code><span class="n">stock</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </code></pre></div></p>
 </div>
-<h2 id="dataloader">DataLoader</h2>
-<p>Making a PyTorch DataLoader for your data is possible with the <code>make_torch_dataset</code> function. It
-takes <code>columns</code> as first argument in a python list/tuple and gives you the element from each column
+<h2 id="dataset-and-dataloader">Dataset and DataLoader</h2>
+<p>Is possible to make a PyTorch Dataset for your data with the <code>make_torch_dataset</code> function. It
+takes <code>columns</code> as first argument in a Python list/tuple and gives you the element from each column
 on a particular index</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p><code>make_torch_dataset</code> is a Hangar function and stockroom only exposing it for convenience</p>
+<p><code>make_torch_dataset</code> is a Hangar function and stockroom is only exposing it for convenience.</p>
 </div>
 <h3 id="make-dataset">Make Dataset</h3>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">make_torch_dataset</span>
@@ -767,12 +764,11 @@ on a particular index</p>
 <span class="hll"><span class="n">dset</span> <span class="o">=</span> <span class="n">make_torch_dataset</span><span class="p">([</span><span class="n">imgcol</span><span class="p">,</span> <span class="n">lblcol</span><span class="p">])</span>
 </span><span class="n">dloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="make-dataloader">Make DataLoader</h3>
 <p>The dataset returned from <code>make_torch_dataset</code> is a subclass of <code>torch.utils.data.Dataset</code> and
-hence is understood by torch <code>DataLoader</code>. You could create the dataloader as you create with
+hence is understood by PyTorch's <code>DataLoader</code>. You can create the <code>DataLoader</code> as you would create it with
 any dataset. Huge batch size, custom collate function, multiple threads - doesn't matter. Use
-it as you wish. Remember, you have made a read only <code>stock</code> object, you'd never corrupt your
+it as you wish. Remember, you have made a read only <code>stock</code> object, so you'll never corrupt your
 data with that.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">stockroom</span> <span class="kn">import</span> <span class="n">make_torch_dataset</span>
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
@@ -783,24 +779,24 @@ data with that.</p>
 <span class="n">dset</span> <span class="o">=</span> <span class="n">make_torch_dataset</span><span class="p">([</span><span class="n">imgcol</span><span class="p">,</span> <span class="n">lblcol</span><span class="p">])</span>
 <span class="hll"><span class="n">dloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
 </span></code></pre></div>
-
 <h2 id="training">Training</h2>
-<p>We'll open a write enabled <code>stock</code> object here since we need to store experiment information (hyper parameters,
-metrics, output, artifacts etc) and model to stockroom.</p>
+<p>We'll open a write enabled <code>stock</code> object here since we need to store experiment information (hyper-parameters,
+metrics, output, artifacts, etc.) and model to stockroom.</p>
 <div class="admonition warning">
 <p class="admonition-title">Careful with the <code>write</code> access</p>
-<p>With more power comes more responsibility. Remember, you can write to your repository</p>
+<p>With more power comes more responsibility. Remember, you can <strong>write</strong> to your repository, 
+that means that you have change permission to your repo, so you might accidentally change things.</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">Your data is safe</p>
-<p>With the power of hangar, any data that is committed to stockroom is safe there. Even if you overwrite
-that data in a new commit, you can always time travel to previous commit and access your old data </p>
+<p>With the power of Hangar, any data that is committed to stockroom is safe there. Even if you overwrite
+that data in a new commit, you can always time travel to a previous commit and access your old data.</p>
 </div>
 <h3 id="store-hyper-parameters">Store hyper-parameters</h3>
-<p>As <code>.data</code> shelf store your data, hyper-parameters and experiment artifacts must be stored in the
-<code>.experiment</code> shelf. While the <code>.data</code> shelf only allow you to store tensor data, <code>.experiment</code> shelf
-will eventually allow you to store any artificats, like a loss graph, or a pickled file you'd need
-for training your model etc.</p>
+<p>As <code>data</code> shelf store your data, hyper-parameters and experiment artifacts must be stored in the
+<code>experiment</code> shelf. While the <code>data</code> shelf only allow you to store tensor data, <code>experiment</code> shelf
+allows you to store any artificats, like a loss graph, or a pickled file you'd need
+for training your model, etc.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -814,16 +810,15 @@ for training your model etc.</p>
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;best_loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
 </span><span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
 </span><span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
 </span>                    <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
                 <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
-
 <h3 id="store-model">Store model</h3>
-<p>The <code>.model</code> shelf takes <code>state_dict</code> from a pytorch model and nothing else. You will eventually be able to store
-a <code>jit</code>ed model into your <code>.experiment</code> store but <code>.model</code> shelf is designed to store your model weights passed
+<p>The <code>model</code> shelf takes the <code>state_dict</code> from a PyTorch model and nothing else. You will eventually be able to store
+a <code>jit</code>ed model into your <code>experiment</code> store but <code>model</code> shelf is designed to store your model weights passed
 as a dictionary.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
@@ -838,24 +833,22 @@ as a dictionary.</p>
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;best_loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
 </span>                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
                     <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
 <span class="hll">                    <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
 </span>                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
-
 <div class="admonition tip">
 <p class="admonition-title">Storing weights is better</p>
 <p>As far as you version your source code, saving the weights is always better. We are building more utilities,
 especially visualization tools, to interact with the data in stockroom. This will eventually help you to analyze
-the model weights, visualize them and even diff it 🤯😍</p>
+the model weights, visualize them and even diff them 🤯😍</p>
 </div>
 <h3 id="commit-your-changes">Commit your changes</h3>
-<p>Commit your changes as you move forward, you can always time travel back and look at. With the context
-managers, <code>autocommit</code> is enabled by default. You can control this behaviour by changing the argument
-value
-<code>.data</code> or <code>.experiment</code> or <code>.model</code> shelves</p>
+<p>Commit your changes as you move forward, so that you can always time travel back and look at what's changed.
+With the context managers, <code>autocommit</code> is enabled by default with a default commit message. 
+You can control this behaviour by providing <code>commit_msg</code> explicitly or even turn off completely the autocommit by setting <code>autocommit=False</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dloader</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -869,17 +862,16 @@ value
             <span class="n">current_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">check_every</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">current_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
-<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">best_loss</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">):</span>
+<span class="hll">                <span class="k">with</span> <span class="n">stock</span><span class="o">.</span><span class="n">enable_write</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;best_loss=</span><span class="si">{</span><span class="n">best_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
 </span>                    <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
                     <span class="n">stock</span><span class="o">.</span><span class="n">experiment</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">momentum</span>
                     <span class="n">stock</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cifarmodel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
                 <span class="n">best_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
 </code></pre></div>
-
 <div class="admonition info">
 <p class="admonition-title">stock commit != git commit</p>
 <p>Stock commit is not same as a git commit. In fact, you can combine multiple stock commit in one
-git commit and consider that as an experiment</p>
+git commit and consider that an experiment.</p>
 </div>
 <h2 id="recap">Recap</h2>
 <ul>
@@ -887,9 +879,9 @@ git commit and consider that as an experiment</p>
 <li>Import torchvision dataset to the repository</li>
 <li>Build the network</li>
 <li>Train your network</li>
-<li>Add data, augment it, experiment with hyper parameters but commit to stockroom along with you commit your source code</li>
+<li>Add data, augment it, experiment with hyper-parameters and then commit to stockroom.</li>
 </ul>
-<p>In case you need, the source code for the above experiment is available at the github repository
+<p>In case you need, the source code for the above experiment is available at the GitHub repository
 <a href="https://github.com/hhsecond/stockroom-cifar10">hhsecond/stockroom-cifar10</a></p>
                 
               
